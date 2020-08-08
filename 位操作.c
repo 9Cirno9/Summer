@@ -1,0 +1,55 @@
+#include<stdio.h>
+int main(void)
+{
+    int a,b,i,j,flag;
+    int num1[16],num2[16];
+    while(scanf("%d%d",&a,&b)!=EOF)
+    {
+        flag=0;
+        if(a==b)
+           flag=1;
+        for(i=15;i>=0;i--)
+        {
+            if(a!=0)
+            {
+              num1[i]=a%2;
+              a=a/2;
+              }
+            else
+            num1[i]=0;
+        }
+        for(i=15;i>=0;i--)
+        {
+            if(b!=0)
+            {
+              num2[i]=b%2;
+              b=b/2;
+              }
+            else
+            num2[i]=0;
+        }
+        for(i=1;i<16;i++)
+        {
+            int c=num1[0];
+            for(j=1;j<=15;j++)
+            {
+                num1[j-1]=num1[j];
+            }
+            num1[15]=c;
+            for(j=0;j<16;j++)
+            {
+                if(num1[j]!=num2[j])
+                break;
+            }
+            if(j==16)
+            {
+                flag=1;
+                break;
+            }
+        }
+        if(flag==1)
+        printf("YES\n");
+        else
+        printf("NO\n");
+    }
+}
