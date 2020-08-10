@@ -3,6 +3,7 @@
 typedef struct Listlink
 {
 	int data;
+	struct Listlink *pre; 
 	struct Listlink *next;
  }List;
 
@@ -12,16 +13,14 @@ List *creatlist(int n)
 	int i,a;
 	head=(List*)malloc(sizeof(List));
 	head->next=NULL;
+	head->pre=NULL;
 	tail=head;
 	for(i=0;i<n;i++)
 	{
 		scanf("%d",&a);
 		p=(List*)malloc(sizeof(List));
 		p->data=a;
-		p->next=NULL;
-		if(head->next==NULL)
-		head->next=p;
-		else
+		p->pre=tail;
 		tail->next=p;
 		tail=p;
 	}
@@ -34,8 +33,8 @@ void main()
 	int i,k=1;
 	scanf("%d",&lon);
 	head=creatlist(lon);
-	l=head->next;
 	p=head->next;
+	l=head->next;
 	for(i=1;i<lon;i++)
 	{
 	p=p->next;
@@ -47,13 +46,11 @@ void main()
 			k=0;
 			break;
 		}
-		p--;
-		l++;
-		printf("%d\n",l->data);
-		printf("%d\n",p->data);
+		l=l->next;
+		p=p->pre;
 	}
 	if(k)
-	printf("Yes");
+	printf("true");
 	else
-	printf("No");
+	printf("false");
 }
